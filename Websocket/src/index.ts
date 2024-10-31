@@ -9,7 +9,7 @@ const users: {
 } = {};
 
 const main = async () => {
-	const subscriberClient = createClient();
+	const subscriberClient = createClient({ url: "redis://redis:6379" });
 	await subscriberClient.connect();
 
 	const wss = new WebSocketServer({ port: 3001 });
@@ -51,7 +51,17 @@ const main = async () => {
 			}
 		});
 
-		userSocket.on("close", (data) => {});
+		userSocket.on("close", () => {
+			const userStocks = [...users[userId].stocks];
+
+			delete users[userId];
+
+			userStocks.map((stock) => {
+				if (isLastUserLeft(stock)) {
+					subscriberClient.unsubscribe(stock);
+				}
+			});
+		});
 	});
 };
 
@@ -70,8 +80,6 @@ const isFirstUserToRoom = (stockSymbol: string) => {
 };
 
 const isLastUserLeft = (stockSymbol: string) => {
-	let numOfUsers = 0;
-
 	for (let userId in users) {
 		if (users[userId].stocks.includes(stockSymbol)) return false;
 	}

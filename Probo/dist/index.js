@@ -37,4 +37,4 @@ app.post("/order/sell", sellStock_1.default);
 app.get("/orderbook/:stockSymbol", getOrderbookForStock_1.default);
 app.get("/pendingOrders/buy/:userId", pendingBuyOrders_1.default);
 app.get("/pendingOrders/sell/:userId", pendingSellOrders_1.default);
-app.listen(4000);
+app.listen(3000);

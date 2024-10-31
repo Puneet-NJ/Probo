@@ -50,4 +50,4 @@ app.get("/pendingOrders/buy/:userId", pendingBuyOrders);
 
 app.get("/pendingOrders/sell/:userId", pendingSellOrders);
 
-app.listen(4000);
+app.listen(3000);

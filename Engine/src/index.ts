@@ -18,7 +18,7 @@ import pendingSellOrders from "./functions/pendingSellOrders";
 export let client: RedisClientType;
 
 const main = async () => {
-	client = createClient();
+	client = createClient({ url: "redis://redis:6379" });
 	await client.connect();
 
 	while (1) {

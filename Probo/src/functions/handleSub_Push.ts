@@ -39,10 +39,10 @@ const handleSub_Push = async (
 };
 
 export const initilizeRedis = async () => {
-	client = createClient();
+	client = createClient({ url: "redis://redis:6379" });
 	await client.connect();
 
-	subClient = createClient();
+	subClient = createClient({ url: "redis://redis:6379" });
 	await subClient.connect();
 };
 
