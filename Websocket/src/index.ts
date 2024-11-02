@@ -12,7 +12,7 @@ const main = async () => {
 	const subscriberClient = createClient({ url: "redis://redis:6379" });
 	await subscriberClient.connect();
 
-	const wss = new WebSocketServer({ port: 3001 });
+	const wss = new WebSocketServer({ port: 3002 });
 
 	wss.on("connection", (userSocket) => {
 		const userId = Math.random();
